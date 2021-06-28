@@ -29,26 +29,29 @@ ul {
 
 }
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
   padding: 15px;
-  margin: 0 auto;
+  margin: 0;
   margin-bottom: 20px;
   background-color: rgb(243, 243, 243);
   width: 95vw;
   height: 95vh;
   border-radius: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+
 }
 
 .card {
   height: 200px;
-  width: 25%;
+  width: 24%;
   border-radius: 18px;
   background: rgb(236,146,146);
   background: linear-gradient(145deg, rgba(236,146,146,1) 0%, rgba(237,14,14,1) 60%, rgb(173, 7, 7) 85%);
   color: black;
   padding: 15px;
+  margin: 2px;
   border-style: none;
 }
 
@@ -66,3 +69,23 @@ ul {
   background: linear-gradient(145deg, rgba(187,236,146,1) 0%, rgba(14,237,77,1) 60%, rgba(174,219,72,1) 85%);
 }
 
+.addBook {
+  position: absolute;
+  background: rgb(206,151,62);
+  background: radial-gradient(circle, rgba(206,151,62,1) 0%, rgba(224,188,128,1) 100%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-style: none;
+  right: 200px;
+  left: 20px;
+  z-index: 3;
+}
+
+.addBook:hover {
+  cursor: pointer;
+}
+
+.modal {
+  
+}

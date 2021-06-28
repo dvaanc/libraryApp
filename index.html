@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
+<header>
+  <h1>Library app</h1>
+  <!-- <div class="stats">
+    <h3>Stats</h3>
+    <ul>
+      <li>Total books: <span data-stats="totalBooks">0</span></li>
+      <li>Read: <span data-stats="read">0</span></li>
+      <li>Not read: <span data-stats="notRead">0</span></li>
+    </ul>
+  </div> -->
+</header>
 <body>
-  <header>
-    <h1>Library app</h1>
-    <!-- <div class="stats">
-      <h3>Stats</h3>
-      <ul>
-        <li>Total books: <span data-stats="totalBooks">0</span></li>
-        <li>Read: <span data-stats="read">0</span></li>
-        <li>Not read: <span data-stats="notRead">0</span></li>
-      </ul>
-    </div> -->
-  </header>
   <div class="container">
     <div class="card">
       <h4>The Hobbit</h4>
@@ -30,7 +30,9 @@
         <input type="checkbox" name="read" id="">
       </label>
     </div>
+
   </div>
+  <button class="addBook modal">+</button>
   <script src="app.js"></script>
 </body>
 </html>
