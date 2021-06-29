@@ -8,20 +8,17 @@ body {
   color: black;
 }
 
-h4 {
-  font-size: 25px;
-}
-
 h1 {
-  text-align: center;
   color: #CE973E;
-  padding: 20px;
 }
 
 ul {
   list-style-type: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
 
 .stats {
   padding: 10px;
@@ -34,7 +31,7 @@ ul {
   justify-content: space-evenly;
   align-content: flex-start;
   padding: 15px;
-  margin: 0;
+  margin: 0 auto;
   margin-bottom: 20px;
   background-color: rgb(243, 243, 243);
   width: 95vw;
@@ -45,13 +42,13 @@ ul {
 
 .card {
   height: 200px;
-  width: 24%;
+  width: 20%;
   border-radius: 18px;
   background: rgb(236,146,146);
   background: linear-gradient(145deg, rgba(236,146,146,1) 0%, rgba(237,14,14,1) 60%, rgb(173, 7, 7) 85%);
   color: black;
   padding: 15px;
-  margin: 2px;
+  margin: 1px;
   border-style: none;
 }
 
@@ -69,7 +66,7 @@ ul {
   background: linear-gradient(145deg, rgba(187,236,146,1) 0%, rgba(14,237,77,1) 60%, rgba(174,219,72,1) 85%);
 }
 
-.addBook {
+.open-modal {
   position: absolute;
   background: rgb(206,151,62);
   background: radial-gradient(circle, rgba(206,151,62,1) 0%, rgba(224,188,128,1) 100%);
@@ -82,10 +79,76 @@ ul {
   z-index: 3;
 }
 
-.addBook:hover {
-  cursor: pointer;
+
+.modal-container {
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.2s ease;
 }
 
-.modal {
-  
+.modal-container.show {
+  pointer-events: auto;
+  opacity: 1;
 }
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px 20px;
+  width: 500px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.close-modal { 
+  position: relative;
+  bottom: 15px;
+  left: 205px;
+  font-size: 20px;
+  border-radius: 50%;
+  padding: 3px 8px;
+
+}
+
+.close-modal:hover {
+  color: white;
+  background-color: #CE973E;
+  border-radius: 50%;
+
+}
+
+.form {
+  width: 100%;
+  padding: 15px;;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+
+}
+.form:focus {
+  outline: none;
+}
+
+.error {
+  float: left;
+  color: red;
+  font-size: 1rem;
+  margin-top: 3px;
+  margin-bottom: 20px;
+}
+
+form h4 {
+  float: left;
+  font-weight: normal;
+}
+
+

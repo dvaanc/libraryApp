@@ -1,6 +1,17 @@
-let container = document.querySelector(".container");
-let card = container.querySelector(".card");
+'use strict';
 
+const container = document.querySelector(".container");
+const card = container.querySelector(".card");
+const openModal = document.querySelector(".open-modal");
+const modalContainer = document.querySelector(".modal-container");
+const closeModal = document.querySelector(".close-modal");
+
+// Modal code
+openModal.addEventListener("click", () => modalContainer.classList.add('show'));
+closeModal.addEventListener("click", () => modalContainer.classList.remove('show'));
+
+
+// Library code
 card.addEventListener("click", (e) => {
   console.log(e.target);
   if(e.target.matches("input")) e.target.classList.toggle('read');
