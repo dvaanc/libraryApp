@@ -16,11 +16,11 @@
       <li>Read: <span data-stats="read">0</span></li>
       <li>Not read: <span data-stats="notRead">0</span></li>
     </ul>
-  </div> -->
+  </div> -->  
 </header>
 <body>
   <div class="container">
-    <div class="card">
+    <!-- <div class="card">
       <h4>The Hobbit</h4>
       <ul>
         <li>Author: J.R Tolkien</li>
@@ -29,31 +29,31 @@
       <label>
         <input type="checkbox" name="read" id="">
       </label>
-    </div>
-
+    </div> -->
   </div>
+
   <button class="open-modal">+</button>
   <div class="modal-container">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
-    <h1>Add a new book</h1>
-    <form>
-      <label for="author">
-        <h4>Book title:</h4>
-        <input class="form" type="text" name="bookTitle" id="bookTitle" placeholder="Title">
-        <p class="error">* Book title required!</p>
-      </label>
-      <label for="author">
-        <h4>Book title:</h4>
-        <input class="form" type="text" name="bookTitle" id="bookTitle" placeholder="Title">
-        <p class="error">* Book title required!</p>
-      </label>
-      <label for="author">
-        <h4>Book title:</h4>
-        <input class="form" type="text" name="bookTitle" id="bookTitle" placeholder="Title">
-        <p class="error">* Book title required!</p>
-      </label>
-    </form>
+      <h1>Add a new book</h1>
+      <form>
+        <label for="title">Book title:</label>
+          <input class="form" type="text" name="title" id="title" placeholder="Harry Potter" required>
+        <label for="author">Book author:</label>
+          <input class="form" type="text" name="author" id="author" placeholder="J.K Rowling" required>
+        <label for="pages">
+          <h4>Pages:</h4>
+          <input class="form" type="number" name="bookTitle" id="bookTitle" placeholder="400" required>
+        </label>
+        <label for="readStatus">Read status:</label>
+          <input class="form" type="radio" name="readStatus" id="read" required> Read
+          <input class="form" type="radio" name="readStatus" id="not read" required> Not read
+        <div class="submit-reset">
+          <input class="form" type="reset" name="reset" id="reset">
+          <input class="form" type="submit" name="submit" id="submit">
+        </div>
+      </form>
     </div>
   </div>
   <script src="app.js"></script>

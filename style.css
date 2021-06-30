@@ -8,6 +8,11 @@ body {
   color: black;
 }
 
+header {
+  text-align: center;
+  margin: 40px;
+}
+
 h1 {
   color: #CE973E;
 }
@@ -23,12 +28,12 @@ button:hover {
 .stats {
   padding: 10px;
   border: 1px solid blue;
-
 }
+
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-content: flex-start;
   padding: 15px;
   margin: 0 auto;
@@ -37,23 +42,18 @@ button:hover {
   width: 95vw;
   height: 95vh;
   border-radius: 15px;
-
+  
 }
 
 .card {
   height: 200px;
   width: 20%;
   border-radius: 18px;
-  background: rgb(236,146,146);
-  background: linear-gradient(145deg, rgba(236,146,146,1) 0%, rgba(237,14,14,1) 60%, rgb(173, 7, 7) 85%);
+  background: linear-gradient(145deg, rgba(206,151,62,1) 0%, rgba(224,188,128,1) 100%);
   color: black;
   padding: 15px;
   margin: 1px;
   border-style: none;
-}
-
-.card:hover {
-  cursor: pointer;
 }
 
 .not-read{
@@ -67,16 +67,20 @@ button:hover {
 }
 
 .open-modal {
-  position: absolute;
-  background: rgb(206,151,62);
-  background: radial-gradient(circle, rgba(206,151,62,1) 0%, rgba(224,188,128,1) 100%);
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   border-style: none;
-  right: 200px;
-  left: 20px;
-  z-index: 3;
+  background: linear-gradient(145deg, rgba(206,151,62,1) 0%, rgba(224,188,128,1) 100%);
+  box-shadow: 10px 14px 85px 9px rgba(0,0,0,0.69);
+  -webkit-box-shadow: 10px 14px 85px 9px rgba(0,0,0,0.69);
+  -moz-box-shadow: 10px 14px 85px 9px rgba(0,0,0,0.69);
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
 }
 
 
@@ -103,32 +107,33 @@ button:hover {
 .modal-content {
   background-color: #fff;
   border-radius: 5px;
-  padding: 20px 20px;
+  padding: 20px 40px;
   width: 500px;
   max-width: 100%;
-  text-align: center;
 }
 
 .close-modal { 
   position: relative;
   bottom: 15px;
-  left: 205px;
+  left: 180px;
   font-size: 20px;
   border-radius: 50%;
   padding: 3px 8px;
-
 }
 
 .close-modal:hover {
+  cursor: pointer;
   color: white;
   background-color: #CE973E;
   border-radius: 50%;
-
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: 15px;;
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 1rem;
@@ -139,7 +144,6 @@ button:hover {
 }
 
 .error {
-  float: left;
   color: red;
   font-size: 1rem;
   margin-top: 3px;
@@ -147,8 +151,12 @@ button:hover {
 }
 
 form h4 {
-  float: left;
   font-weight: normal;
+}
+
+.submit-reset {
+  display: flex;
+  
 }
 
 

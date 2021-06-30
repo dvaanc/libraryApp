@@ -5,19 +5,24 @@ const card = container.querySelector(".card");
 const openModal = document.querySelector(".open-modal");
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
+const deleteBook = document.querySelector*(".delete-book");
 
 // Modal code
 openModal.addEventListener("click", () => modalContainer.classList.add('show'));
 closeModal.addEventListener("click", () => modalContainer.classList.remove('show'));
+modalContainer.addEventListener("click", (e) => {
+  if (e.target === modalContainer) modalContainer.classList.remove('show');
+});
 
 
 // Library code
-card.addEventListener("click", (e) => {
-  console.log(e.target);
-  if(e.target.matches("input")) e.target.classList.toggle('read');
-})
+// card.addEventListener("click", (e) => {
+//   console.log(e.target);
+//   if(e.target.matches("input")) e.target.classList.toggle('read');
+// })
 
 let myLibrary = [];
+//constructor
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -37,11 +42,13 @@ function addBook(title, author, pages, read) {
   myLibrary.push(book);
 }
 
+
 function appendBooks() {
   myLibrary.forEach(book => { 
     console.log(book)
     let html = `
-    <div class="card">
+    <div class="card" data-index="${myLibrary.indexOf(book)}">
+      <span class="delete-book">&times;</span>
     <h4>${book.title}</h4>
     <ul>
       <li>Author: ${book.title}</li>
@@ -53,13 +60,18 @@ function appendBooks() {
   </div>
     `
    container.innerHTML += html; })
+}
+
+deleteBook.addEventListener("click", (e) => {
+  if(e.target === deleteBook) {
     
   }
+} )
 
 
 addBook("The Hobbit", "J.R Tolkien", 455, "Read");
 addBook("Harry Potter", "J.K Rowling", 600, "Read");
-addBook("Harry Potter", "J.K Rowling", 600, "Read");
+addBook("Harry Pott", "J.K Rowling", 600, "Read");
 appendBooks();
 
 console.log(myLibrary)
