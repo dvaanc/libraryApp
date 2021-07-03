@@ -37,18 +37,18 @@
     <div class="modal-content">
       <span class="close-modal">&times;</span>
       <h1>Add a new book</h1>
-      <form>
+      <form id="form" onsubmit="return false">
         <label for="title">Book title:</label>
           <input class="form" type="text" name="title" id="title" placeholder="Harry Potter" required>
         <label for="author">Book author:</label>
           <input class="form" type="text" name="author" id="author" placeholder="J.K Rowling" required>
-        <label for="pages">
-          <h4>Pages:</h4>
-          <input class="form" type="number" name="bookTitle" id="bookTitle" placeholder="400" required>
-        </label>
+        <label for="pages">Pages:</label>
+          <input class="form" type="number" name="pages" id="pages" placeholder="400" required>
         <label for="readStatus">Read status:</label>
-          <input class="form" type="radio" name="readStatus" id="read" required> Read
-          <input class="form" type="radio" name="readStatus" id="not read" required> Not read
+          <select class="form" name="readStatus" id="readStatus">
+            <option value="false">not read</option>
+            <option value="true">read</option>
+          </select>
         <div class="submit-reset">
           <input class="form" type="reset" name="reset" id="reset">
           <input class="form" type="submit" name="submit" id="submit">
