@@ -7,20 +7,14 @@ const openModal = document.querySelector(".open-modal");
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
 const deleteBook = document.querySelector*(".delete-book");
-//form selectors
-// const formTitle = document.getElementById("title").value;
-// const formAuthor = document.getElementById("author").value;
-// const formPages = document.getElementById("pages").value;
-// const formReadStatus = document.getElementById("readStatus").value;
+//get input values on submit button
 document.getElementById("form").onsubmit = function() {
 const formTitle = document.getElementById("title").value;
 const formAuthor = document.getElementById("author").value;
 const formPages = document.getElementById("pages").value;
 const formReadStatus = document.getElementById("readStatus").value;
   //code
-  console.log(formTitle, formAuthor, formPages,formReadStatus);
   addBook(formTitle, formAuthor, formPages, formReadStatus);
-  console.log(myLibrary);
   container.innerHTML = "";
   appendBooks();
   return false;
@@ -28,16 +22,14 @@ const formReadStatus = document.getElementById("readStatus").value;
 
 const formSubmit = document.getElementById("submit");
 
+card.addEventListener("click", (e) => console.log(e.parentELement))
+
 // Modal code
 openModal.addEventListener("click", () => modalContainer.classList.add('show'));
 closeModal.addEventListener("click", () => modalContainer.classList.remove('show'));
 modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove('show');
 });
-// formSubmit.addEventListener("click", () => {
-//   console.log(formTitle);
-// })
-
 
 // Library code
 // card.addEventListener("click", (e) => {
