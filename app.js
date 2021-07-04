@@ -38,13 +38,15 @@ container.addEventListener("click", (e) => {
   };
 
   if (e.target.matches("input")) {
+    const cardIndex = e.target.parentNode.parentNode.dataset.index;
     if (e.target.checked) {
       e.target.parentNode.parentNode.classList.toggle("checked");
+      myLibrary[cardIndex].read = "checked";
     } else { 
+      myLibrary[cardIndex].read = "";
       e.target.parentNode.parentNode.classList.toggle("checked");
-    }
-
-  }
+    };
+  };
 })
 
 //toggle read status on click
