@@ -9,7 +9,7 @@ const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
 const deleteBook = document.querySelector*(".delete-book");
 
-//get input values on submit
+//get input values + add book on submission
 document.getElementById("form").onsubmit = function() {
 const formTitle = document.getElementById("title").value;
 const formAuthor = document.getElementById("author").value;
@@ -29,16 +29,26 @@ modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove('show');
 });
 
-//delete card on click
+//delete card on click + toggle readStatus
 container.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-book")) {
     const cardIndex = e.target.parentNode.dataset.index;
-    console.log(cardIndex)
     myLibrary.splice(cardIndex, 1);
-    console.log(myLibrary)
     e.target.parentNode.remove();
   };
+
+  if (e.target.matches("input")) {
+    if (e.target.checked) {
+      e.target.parentNode.parentNode.classList.toggle("checked");
+    } else { 
+      e.target.parentNode.parentNode.classList.toggle("checked");
+    }
+
+  }
 })
+
+//toggle read status on click
+
 
 //main logic
 let myLibrary = [];
@@ -65,9 +75,9 @@ function addBook(title, author, pages, read) {
 
 function appendBooks() {
   myLibrary.forEach(book => { 
-    console.log(book)
+    
     let html = `
-    <div class="card" data-index="${myLibrary.indexOf(book)}">
+    <div class="card ${book.read}" data-index="${myLibrary.indexOf(book)}">
       <span class="delete-book">&times;</span>
     <h4>${book.title}</h4>
     <ul>
@@ -75,18 +85,15 @@ function appendBooks() {
       <li>Pages: ${book.pages}</li>
     </ul>
     <label>
-      <input type="checkbox" name="read" id="">
+      Read status:<input type="checkbox" name="read" ${book.read}>
     </label>
   </div>
     `
    container.innerHTML += html; })
 }
 
-addBook("The Hobbit", "J.R Tolkien", 455, true);
-addBook("Harry Potter", "J.K Rowling", 600, true);
-addBook("Harry Pott", "J.K Rowling", 600, false);
+addBook("The Hobbit", "J.R Tolkien", 455, "checked");
 appendBooks();
-console.log(myLibrary)
 
 
 
