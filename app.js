@@ -1,44 +1,48 @@
 'use strict';
-//library selectors
+
 const container = document.querySelector(".container");
-const card = container.querySelector(".card");
+const card = document.querySelector(".card");
+
 //modal selectors
 const openModal = document.querySelector(".open-modal");
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
 const deleteBook = document.querySelector*(".delete-book");
-//get input values on submit button
+
+//get input values on submit
 document.getElementById("form").onsubmit = function() {
 const formTitle = document.getElementById("title").value;
 const formAuthor = document.getElementById("author").value;
 const formPages = document.getElementById("pages").value;
 const formReadStatus = document.getElementById("readStatus").value;
-  //code
+  modalContainer.classList.remove('show');
   addBook(formTitle, formAuthor, formPages, formReadStatus);
   container.innerHTML = "";
   appendBooks();
   return false;
-};
+}
 
-const formSubmit = document.getElementById("submit");
-
-card.addEventListener("click", (e) => console.log(e.parentELement))
-
-// Modal code
+// modal 
 openModal.addEventListener("click", () => modalContainer.classList.add('show'));
 closeModal.addEventListener("click", () => modalContainer.classList.remove('show'));
 modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove('show');
 });
 
-// Library code
-// card.addEventListener("click", (e) => {
-//   console.log(e.target);
-//   if(e.target.matches("input")) e.target.classList.toggle('read');
-// })
+//delete card on click
+container.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-book")) {
+    const cardIndex = e.target.parentNode.dataset.index;
+    console.log(cardIndex)
+    myLibrary.splice(cardIndex, 1);
+    console.log(myLibrary)
+    e.target.parentNode.remove();
+  };
+})
 
+//main logic
 let myLibrary = [];
-//constructor
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -78,17 +82,12 @@ function appendBooks() {
    container.innerHTML += html; })
 }
 
-// deleteBook.addEventListener("click", (e) => {
-//   if(e.target === deleteBook) {
-    
-//   }
-// } )
-
-
 addBook("The Hobbit", "J.R Tolkien", 455, true);
 addBook("Harry Potter", "J.K Rowling", 600, true);
 addBook("Harry Pott", "J.K Rowling", 600, false);
 appendBooks();
 console.log(myLibrary)
+
+
 
 

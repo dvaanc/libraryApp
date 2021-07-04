@@ -57,7 +57,8 @@ button:hover {
 }
 
 .delete-book {
-  display: flex;
+  font-size: 20px;
+  float:right;
 }
 
 .delete-book:hover {
