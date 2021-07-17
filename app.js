@@ -55,15 +55,17 @@ container.addEventListener("click", (e) => {
 //main logic
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-Book.prototype.info = function () { 
-  return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`
+  info() { 
+    return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`
+  }
 }
 
 let book1 = new Book ("Idk", "Danny", 355, "read")
