@@ -9,3 +9,4 @@ Live Preview:
 Features to be added:
 - Local storage
 - Change default checkbox to a slider checkbox
+- Mobile responsiveness
