@@ -15,10 +15,12 @@ const formTitle = document.getElementById("title").value;
 const formAuthor = document.getElementById("author").value;
 const formPages = document.getElementById("pages").value;
 const formReadStatus = document.getElementById("readStatus").value;
+
   modalContainer.classList.remove('show');
   addBook(formTitle, formAuthor, formPages, formReadStatus);
   container.innerHTML = "";
   appendBooks();
+  console.log(myLibrary);
   return false;
 }
 

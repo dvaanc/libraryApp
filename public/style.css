@@ -108,9 +108,9 @@ button:hover {
   transition: opacity 0.2s ease;
 }
 
-.modal-container.show {
-  pointer-events: auto;
+.show {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .modal-content {
