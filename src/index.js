@@ -1,8 +1,7 @@
 'use strict';
 import { initializeApp } from 'firebase/app';
 import config from './firebase-config.js';
-import { getFirestore, collection, getDocs, getDoc, doc, setDoc, deleteDoc } from 'firebase/firestore/lite';
-
+import { getFirestore, collection, getDocs, getDoc, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore/lite';
 
 const app = initializeApp(config);
 const db = getFirestore(app);
@@ -15,7 +14,6 @@ const db = getFirestore(app);
 // const item = await getDoc(defaultItem);
 // console.log(item.data());
 const pushData = async(data) => {
-  myLibrary = [];
   await setDoc(doc(db, 'library', data.title), { 
     title: data.title,
     author: data.author,
@@ -23,22 +21,26 @@ const pushData = async(data) => {
     read: data.read,
   });
 }
-
 const fetchData = async() => {
+  myLibrary = [];
   const library = await getDocs(collection(db, 'library'))
-      await library.forEach((doc) => {
-        const data = doc.data();
-        addBook(data.title, data.author, data.pages, data.checked);
-      });
+    await library.forEach((doc) => {
+      const data = doc.data();
+      addBook(data.title, data.author, data.pages, data.read);
+    });
 }
-
+const deleteData = async(title) => {
+  await deleteDoc(doc(db, 'library', title))
+}
+const updateReadStatus = async(title, checked) => {
+  await updateDoc(doc(db, 'library', title), { read: checked })
+}
 const container = document.querySelector(".container");
 const card = document.querySelector(".card");
 //modal selectors
 const openModal = document.querySelector(".open-modal");
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
-const deleteBook = document.querySelector(".delete-book");
 //get input values + add book on submission
 document.getElementById("form").onsubmit = async function(e) {
   e.preventDefault();
@@ -54,10 +56,8 @@ document.getElementById("form").onsubmit = async function(e) {
   };
   await pushData(data);
   await fetchData();
-  await appendBooks();
-  container.innerHTML = "";
+  appendBooks();
     modalContainer.classList.remove('show');
-    console.log(myLibrary);
 }
 // modal 
 openModal.addEventListener("click", () => modalContainer.classList.add('show'));
@@ -66,18 +66,24 @@ modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove('show');
 });
 //delete card on click + toggle readStatus
-container.addEventListener("click", (e) => {
+container.addEventListener("click", async(e) => {
   if (e.target.classList.contains("delete-book")) {
-    const cardIndex = e.target.parentNode.dataset.index;
-    myLibrary.splice(cardIndex, 1);
-    e.target.parentNode.remove();
+    const title = e.target.dataset.title;
+    await deleteData(title);
+    await fetchData();
+    appendBooks();
+    // const cardIndex = e.target.parentNode.dataset.index;
+    // myLibrary.splice(cardIndex, 1);
+    // e.target.parentNode.remove();
   };
   if (e.target.matches("input")) {
     const cardIndex = e.target.parentNode.parentNode.dataset.index;
     if (e.target.checked) {
-      e.target.parentNode.parentNode.classList.toggle("checked");
+      updateReadStatus(e.target.dataset.title, "checked")
       myLibrary[cardIndex].read = "checked";
+      e.target.parentNode.parentNode.classList.toggle("checked");
     } else { 
+      updateReadStatus(e.target.dataset.title, "")
       myLibrary[cardIndex].read = "";
       e.target.parentNode.parentNode.classList.toggle("checked");
     };
@@ -102,17 +108,18 @@ function addBook(title, author, pages, read) {
   myLibrary.push(book);
 }
 function appendBooks() {
+  container.innerHTML = "";
   myLibrary.forEach(book => { 
     let html = `
     <div class="card ${book.read}" data-index="${myLibrary.indexOf(book)}">
-      <span class="delete-book">&times;</span>
+      <span class="delete-book" data-title="${book.title}">&times;</span>
     <h4>${book.title}</h4>
     <ul>
       <li>Author: ${book.title}</li>
       <li>Pages: ${book.pages}</li>
     </ul>
     <label>
-      Read status:<input type="checkbox" name="read" ${book.read}>
+      Read status: <input type="checkbox" name="read" data-title="${book.title}" ${book.read}>
     </label>
   </div>
     `
