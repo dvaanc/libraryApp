@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Library App</title>
+</head>
+<header>
+  <h1>Library app</h1>
+  <!-- <div class="stats">
+    <h3>Stats</h3>
+    <ul>
+      <li>Total books: <span data-stats="totalBooks">0</span></li>
+      <li>Read: <span data-stats="read">0</span></li>
+      <li>Not read: <span data-stats="notRead">0</span></li>
+    </ul>
+  </div> -->  
+</header>
+<body>
+  <div class="container">
+    <!-- <div class="card">
+      <h4>The Hobbit</h4>
+      <ul>
+        <li>Author: J.R Tolkien</li>
+        <li>Pages: 550</li>
+      </ul>
+      <label>
+        <input type="checkbox" name="read" id="">
+      </label>
+    </div> -->
+  </div>
+
+  <button class="open-modal">+</button>
+  <div class="modal-container">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h1>Add a new book</h1>
+      <form id="form" onsubmit="submitForm(e)">
+        <label for="title">Book title:</label>
+          <input class="form" type="text" name="title" id="title" placeholder="Harry Potter" required>
+        <label for="author">Book author:</label>
+          <input class="form" type="text" name="author" id="author" placeholder="J.K Rowling" required>
+        <label for="pages">Pages:</label>
+          <input class="form" type="number" name="pages" id="pages" placeholder="400" required>
+        <label for="readStatus">Read status:</label>
+          <select class="form" name="readStatus" id="readStatus">
+            <option value="">not read</option>
+            <option value="checked">read</option>
+          </select>
+        <div class="submit-reset">
+          <input class="form" type="reset" name="reset" id="reset">
+          <input class="form" type="submit" name="submit" id="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
