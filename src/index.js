@@ -1,36 +1,70 @@
 'use strict';
+import { initializeApp } from 'firebase/app';
+import config from './firebase-config.js';
+import { getFirestore, collection, getDocs, getDoc, doc, setDoc, deleteDoc } from 'firebase/firestore/lite';
+
+
+const app = initializeApp(config);
+const db = getFirestore(app);
+// const library = collection(db, "library");
+// const fetchLibrary = await getDocs(library);
+// fetchLibrary.forEach((doc) => {
+//   console.log(doc.data());
+// })
+// const defaultItem = doc(db, "library", "default");
+// const item = await getDoc(defaultItem);
+// console.log(item.data());
+const pushData = async(data) => {
+  myLibrary = [];
+  await setDoc(doc(db, 'library', data.title), { 
+    title: data.title,
+    author: data.author,
+    pages: data.pages,
+    read: data.read,
+  });
+}
+
+const fetchData = async() => {
+  const library = await getDocs(collection(db, 'library'))
+      await library.forEach((doc) => {
+        const data = doc.data();
+        addBook(data.title, data.author, data.pages, data.checked);
+      });
+}
 
 const container = document.querySelector(".container");
 const card = document.querySelector(".card");
-
 //modal selectors
 const openModal = document.querySelector(".open-modal");
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close-modal");
-const deleteBook = document.querySelector*(".delete-book");
-
+const deleteBook = document.querySelector(".delete-book");
 //get input values + add book on submission
-document.getElementById("form").onsubmit = function() {
-const formTitle = document.getElementById("title").value;
-const formAuthor = document.getElementById("author").value;
-const formPages = document.getElementById("pages").value;
-const formReadStatus = document.getElementById("readStatus").value;
-
-  modalContainer.classList.remove('show');
-  addBook(formTitle, formAuthor, formPages, formReadStatus);
+document.getElementById("form").onsubmit = async function(e) {
+  e.preventDefault();
+  const formTitle = document.getElementById("title").value;
+  const formAuthor = document.getElementById("author").value;
+  const formPages = document.getElementById("pages").value;
+  const formReadStatus = document.getElementById("readStatus").value;
+  const data = {
+    title: formTitle,
+    author: formAuthor,
+    pages: formPages,
+    read: formReadStatus,
+  };
+  await pushData(data);
+  await fetchData();
+  await appendBooks();
   container.innerHTML = "";
-  appendBooks();
-  console.log(myLibrary);
-  return false;
+    modalContainer.classList.remove('show');
+    console.log(myLibrary);
 }
-
 // modal 
 openModal.addEventListener("click", () => modalContainer.classList.add('show'));
 closeModal.addEventListener("click", () => modalContainer.classList.remove('show'));
 modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove('show');
 });
-
 //delete card on click + toggle readStatus
 container.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-book")) {
@@ -38,7 +72,6 @@ container.addEventListener("click", (e) => {
     myLibrary.splice(cardIndex, 1);
     e.target.parentNode.remove();
   };
-
   if (e.target.matches("input")) {
     const cardIndex = e.target.parentNode.parentNode.dataset.index;
     if (e.target.checked) {
@@ -50,13 +83,9 @@ container.addEventListener("click", (e) => {
     };
   };
 })
-
 //toggle read status on click
-
-
 //main logic
 let myLibrary = [];
-
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -64,24 +93,16 @@ class Book {
     this.pages = pages;
     this.read = read;
   }
-
   info() { 
     return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`
   }
 }
-
-let book1 = new Book ("Idk", "Danny", 355, "read")
-
-
 function addBook(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
-
-
 function appendBooks() {
   myLibrary.forEach(book => { 
-    
     let html = `
     <div class="card ${book.read}" data-index="${myLibrary.indexOf(book)}">
       <span class="delete-book">&times;</span>
@@ -95,11 +116,12 @@ function appendBooks() {
     </label>
   </div>
     `
-   container.innerHTML += html; })
+  container.innerHTML += html })
 }
 
-addBook("The Hobbit", "J.R Tolkien", 455, "checked");
+await fetchData();
 appendBooks();
+
 
 
 
